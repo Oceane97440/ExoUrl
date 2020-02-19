@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Champs simple</h1>
+    <p>Exercice : Produire un code JS qui permet de prendre une URL via un input et de retourner une chaine de caractère sous la forme "item-x" ou x correspond à l'ID unique de l'élément (l'URL) sauvegardé en base.</p>
+
+    <form method="POST" role="form" action="/add" class="form-horizontal"style="padding-bottom: 20px;"  >
+    
+    <span class="input-group-text" >Votre URL</span>
+
+    <input type="text" class="form-control"  name="url">
+    
+    <button type="submit" > Envoyer</button>
+    
+    
+    
+    </form>
+
+
+    <% if (articles) { %>
+        <% for(var i = 0; i < articles.length; i++) { %>
+            <h2>Item:<%= articles[i].id %></h2>
+            <a href="<%= articles[i].id %>"></a>
+           <h4>URL:<%= articles[i].url %></h4>
+                           
+           <% } %>
+       
+       <% } %>
+   
+</body>
+</html>
