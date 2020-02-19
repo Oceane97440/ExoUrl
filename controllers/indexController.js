@@ -22,29 +22,36 @@ console.log("BDD CONNECTER")
     console.log(articles);
 
         res.render('index.ejs',{articles:articles});
+
     });
 
     
     };
   
+    controller.redirect = (req, res) => {
+
+      IDURL.findById(req.params.id, function (err, articles) {
+
+        console.log(articles);
+   
+        res.redirect(articles.url);    
+  
+    });
+        
+    };
+    
+
+
 //Sauvegarde les données
 controller.save = (req, res) => {
-
-    // console.log(req.params);
-  
-    //new Article=nom du model dans schemas.js
    
       var articles = new IDURL({
   
         url :req.body.url,
        
-        
       });
       console.log(articles);
-     // console.log(req.body);
 
-      //Nous stockons l'objet en base
-      //artcles=var articles au nom_donnée (2)
       articles.save(function(err){
           if(err){
             res.send(err);
@@ -52,9 +59,7 @@ controller.save = (req, res) => {
           
           return res.redirect('/'); 
   
-        })
-        
-  
+      })
   };
 
 //Important pour export
