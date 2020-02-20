@@ -47,19 +47,7 @@ controller.index = (req, res) => {
           })
        
     };
-  
-    controller.redirect = (req, res) => {
-
-      IDURL.findById(req.params.id, function (err, articles) {
-
-        console.log(articles);
-   
-        res.redirect(articles.url);    
-  
-    });
-        
-    };
-    
+ 
 
 
 //Sauvegarde les données
@@ -81,6 +69,18 @@ controller.save = (req, res) => {
   
       })
   };
+ 
+  controller.redirect = (req, res) => {
 
+    IDURL.findById(req.params.id, function (err, articles) {
+
+      console.log(articles);
+ 
+      res.redirect(articles.url);    
+
+  });
+      
+  };
+  
 //Important pour export
 module.exports = controller;
