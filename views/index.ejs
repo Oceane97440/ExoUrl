@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Gérer la pagination</title>
 </head>
 <body>
+<nav>
+    <ul class="nav">
+  
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/1">Liste url</a>
+        </li>
+      
+      </ul>
+</nav>    
+
+
     <h1>Champs simple</h1>
     <p>Exercice : Produire un code JS qui permet de prendre une URL via un input et de retourner une chaine de caractère sous la forme "item-x" ou x correspond à l'ID unique de l'élément (l'URL) sauvegardé en base.</p>
 
@@ -22,15 +38,7 @@
     </form>
 
 
-    <% if (articles) { %>
-        <% for(var i = 0; i < articles.length; i++) { %>
-            <h2>Item:<%= articles[i].id %></h2>
-            <a href="<%= articles[i].id %>"></a>
-           <h4>URL:<%= articles[i].url %></h4>
-                           
-           <% } %>
-       
-       <% } %>
+    
    
 </body>
 </html>

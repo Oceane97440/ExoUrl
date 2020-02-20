@@ -12,20 +12,40 @@ mongoose.connect("mongodb+srv://oceane08:password974@cluster0-owldh.mongodb.net/
 console.log("BDD CONNECTER")
 );
 
-//Chemain vers liste articles
 
-    controller.index = (req, res) => {
+controller.index = (req, res) => {
         //Chemain vers l'affichage du formulaires
 
-        IDURL.find(function(err, articles){
+       res.render('index.ejs');
 
-    console.log(articles);
+    };
 
-        res.render('index.ejs',{articles:articles});
 
-    });
 
+
+
+
+
+//Chemain vers liste articles
+    controller.pagination = async (req, res,next) => {
+      var perPage = 5
+      var page = req.params.page || 1
     
+      IDURL
+          .find({})
+          .skip((perPage * page) - perPage)
+          .limit(perPage)
+          .exec(function(err, products) {
+            IDURL.count().exec(function(err, count) {
+                  if (err) return next(err)
+                  res.render('pagination.ejs', {
+                    products: products,
+                      current: page,
+                      pages: Math.ceil(count / perPage)
+                  })
+              })
+          })
+       
     };
   
     controller.redirect = (req, res) => {

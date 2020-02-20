@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Gérer la pagination</title>
+</head>
+<body>
+<nav>
+    <ul class="nav">
+  
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/1">Liste url</a>
+        </li>
+      
+      </ul>
+</nav>    
+    <p>Créer une page qui liste les URL enregistré dans la base (gérer la pagination). 5 URL par pages.</p>
+
+ 
+       <ul>
+        <div class="container">
+          <div class="row">
+            <% if (products) { %>
+      
+              <% for (var i = 0; i < products.length; i++) { %>
+                  <div class="col-md-4">
+                  
+                    <h6>URL:<%= products[i].url %></h6>
+                    
+                    </li>
+                  </div>
+              <% } %>
+          </div>
+          <% } %>
+      
+         </div>
+      
+      </ul>
+      <% if (pages > 0) { %>
+        <ul class="pagination text-center">
+            <% if (current == 1) { %>
+                <li class="disabled"><a> </a></li>
+            <% } else { %>
+                <li><a href="/1"></a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="active"><a><%= i %></a></li>
+                <% } else { %>
+                    <li><a href="/<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+                <li class="disabled"><a></a></li>
+            <% } else { %>
+                <li><a href="/<%= pages %>"></a></li>
+            <% } %>
+        </ul>
+      <% } %>
+
+</body>
+</html>
