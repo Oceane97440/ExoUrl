@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const IDURL=require("../models/shemas");
 const QRCode = require('qrcode');
+const paginate = require('express-paginate');
+
 
 var controller = {};
 
@@ -22,24 +24,24 @@ controller.index = (req, res) => {
 
 //Chemain vers liste url et la pagination
 controller.pagination = async (req, res,next) => {
-      var perPage = 5
-      var page = req.params.page || 1
+  
+          try {
+            const [results, itemCount] = await Promise.all([
+              IDURL.find({}).limit(req.query.limit).skip(req.skip).lean().exec(),
+              IDURL.countDocuments({})
+            ]);
     
-      IDURL
-          .find({})
-          .skip((perPage * page) - perPage)
-          .limit(perPage)
-          .exec(function(err, products) {
-            IDURL.count().exec(function(err, count) {
-                  if (err) return next(err)
-                  res.render('pagination.ejs', {
-                    products: products,
-                      current: page,
-                      pages: Math.ceil(count / perPage)
-                  })
-              })
-          })
-       
+            const pageCount = Math.ceil(itemCount / req.query.limit);
+          
+            res.render('pagination.ejs', {
+              products: results,
+                pageCount,
+                itemCount,
+                pages: paginate.getArrayPages(req)(3, pageCount, req.query.page)
+            })
+        } catch (err) {
+            next(err);
+        }
 };
  
 controller.qrcode= (req, res, next) => {
@@ -47,10 +49,10 @@ controller.qrcode= (req, res, next) => {
 
   IDURL.findById(req.params.item, (err, url) => {
 
-  QRCode.toDataURL(url.url, function (err, qrcode) {
-    console.log(qrcode);
+  QRCode.toDataURL(url.url, function (err, products) {
+    console.log(products);
 
-    res.render('qrcode.ejs',{qrcode});
+    res.render('qrcode.ejs',{products});
   })
 
  })
@@ -78,17 +80,17 @@ controller.save = (req, res) => {
   };
  
   //Redirect pour 1 id
-  controller.redirect = (req, res) => {
+  // controller.redirect = (req, res) => {
 
-    IDURL.findById(req.params.id, function (err, articles) {
+  //   IDURL.findById(req.params.id, function (err, articles) {
 
-      console.log(articles);
+  //     console.log(articles);
  
-      res.redirect(articles.url);    
+  //     res.redirect(articles.url);    
 
-  });
+  // });
       
-  };
+  // };
   
 
 
