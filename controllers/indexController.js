@@ -1,7 +1,7 @@
 //Connetion bdd mongoclient
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const IDURL=require("../models/shemas");
-
+const QRCode = require('qrcode');
 
 var controller = {};
 
@@ -12,22 +12,16 @@ mongoose.connect("mongodb+srv://oceane08:password974@cluster0-owldh.mongodb.net/
 console.log("BDD CONNECTER")
 );
 
-
+ //Chemain vers l'affichage du formulaires
 controller.index = (req, res) => {
-        //Chemain vers l'affichage du formulaires
+       
 
-       res.render('index.ejs');
-
-    };
-
+  res.render('index.ejs');
+};
 
 
-
-
-
-
-//Chemain vers liste articles
-    controller.pagination = async (req, res,next) => {
+//Chemain vers liste url et la pagination
+controller.pagination = async (req, res,next) => {
       var perPage = 5
       var page = req.params.page || 1
     
@@ -46,8 +40,21 @@ controller.index = (req, res) => {
               })
           })
        
-    };
+};
  
+controller.qrcode= (req, res, next) => {
+
+
+  IDURL.findById(req.params.item, (err, url) => {
+
+  QRCode.toDataURL(url.url, function (err, qrcode) {
+    console.log(qrcode);
+
+    res.render('qrcode.ejs',{qrcode});
+  })
+
+ })
+};
 
 
 //Sauvegarde les données
@@ -70,6 +77,7 @@ controller.save = (req, res) => {
       })
   };
  
+  //Redirect pour 1 id
   controller.redirect = (req, res) => {
 
     IDURL.findById(req.params.id, function (err, articles) {
@@ -82,5 +90,7 @@ controller.save = (req, res) => {
       
   };
   
+
+
 //Important pour export
 module.exports = controller;
