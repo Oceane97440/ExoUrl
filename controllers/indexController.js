@@ -49,27 +49,27 @@ controller.qrcode= (req, res, next) => {
 
   IDURL.findById(req.params.item, (err, url) => {
 
-  QRCode.toDataURL(url.url, function (err, products) {
-    console.log(products);
+  QRCode.toDataURL(url.url, function (err, product) {
+    console.log(product);
 
-    res.render('qrcode.ejs',{products});
-  })
+    res.render('qrcode.ejs',{product});
+  });
 
- })
+ });
 };
 
 
 //Sauvegarde les données
 controller.save = (req, res) => {
    
-      var articles = new IDURL({
+      var product = new IDURL({
   
         url :req.body.url,
        
       });
-      console.log(articles);
+      console.log(product);
 
-      articles.save(function(err){
+      product.save(function(err){
           if(err){
             res.send(err);
           }

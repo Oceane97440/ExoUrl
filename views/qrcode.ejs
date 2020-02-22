@@ -29,10 +29,12 @@
   
     <div class="col-md-4">
    
-        
+      <% if (product) { %>
+
         <!-- affiche le qrcode liée à l'id d'un url-->
-        <img src="<%= products %>">
-    
+        <img src="<%= product %>">
+        <% } %>
+
     
     </div>
 
