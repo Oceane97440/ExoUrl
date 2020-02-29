@@ -4,45 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
  
+    <title>QRCODE</title>
 
-
-    <title>Gérer la pagination</title>
 </head>
 <body>
 <nav>
-    <ul class="nav">
-  
-        <li class="nav-item">
-          <a class="nav-link" href="/">Home</a></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/page">Liste url</a>
-        </li>
-      
-      </ul>
-</nav>    
 
-    <h2>Scanner votre Qrcode</h2>
+  <div class="container">
 
-  
-    <div class="col-md-4">
-   
+
+  <%- include('partials/nav') %>
+
+    <h1>Scanner votre Qrcode</h1>
+
+
+    <div class="row">
       <% if (product) { %>
+                
+     
+                 <div class="col-md-4">
+                    <div class="card mb-4">
+                       <div class="card-body">
+                        <img src="<%= product %>" class="card-img-top" >
+                         
 
-        <!-- affiche le qrcode liée à l'id d'un url-->
-        <img src="<%= product %>">
-        <% } %>
-
-    
-    </div>
-
-
+                       </div>
+                    </div>
+                 </div>
+                 <% } %> 
+        
+              </div>
 
 
 
-
+  </div>
 
 
 

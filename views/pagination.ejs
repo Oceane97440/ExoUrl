@@ -4,65 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+
  
 
 
     <title>Gérer la pagination</title>
 </head>
 <body>
-<nav>
-    <ul class="nav">
-  
-        <li class="nav-item">
-          <a class="nav-link" href="/">Home</a></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/page">Liste url</a>
-        </li>
-      
-      </ul>
-</nav>    
 
-    <h2>Liste URL</h2>
+<div class="container">
+
+    <%- include('partials/nav') %>
+
+    <h1>Listes URL</h1>
 
 
  
      
         <!-- Liste des url -->
      
-     
-        <div class="col-md-6">
+
+        
           
-            <% if (products) { %>
-              
-               <% for (var i = 0; i < products.length; i++) { %>
-            <!-- faire le lien entre la vue qrcode faire des modal -->
-            <a class="btn btn-info" target="_blank" role="button" href="/qrcode/<%= products[i]._id %>"> <%= products[i].url %></a> 
-          
+           <div class="row">
+ <% if (products) { %>
+            <% for (var i = 0; i < products.length; i++) { %>
+
+            <div class="col-md-4">
+               <div class="card mb-4">
+                  <div class="card-body">
+                     <h5 class="card-title">Votre URL</h5>
+                     <p class="card-text">Id:<%= products[i]._id %></p>
+                     <a class="btn btn-outline-dark btn-sm"target="_blank" role="button" href="/qrcode/<%= products[i]._id %>"><%= products[i].url %></a>
+                  </div>
+               </div>
+            </div>
             <% } %> 
-            <% } %>
+         <% } %> 
+         </div>
         
-           </div>
-        
-<!-- Si possbile ajout d'un popup bootstrap -->
-
-
-   
     <!-- Pagination -->
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
 
-            <%for(let i =1; i <= pageCount;  i++ ) {  %>
-                <li><a href="/page?page=<%=i%>"><%=i%></a></li>
-            <% } %>
-            
+    <div class="text-center">
+    <nav aria-label="Page navigation example" style="display: inline-block;">
+        <ul class="pagination ">
+           <%for(let i =1; i <= pageCount;  i++ ) {  %>
+          <li class="page-item active"><a class="page-link"  href="/page?page=<%=i%>"><%=i%></a></li>
+          <% } %>
         </ul>
-    </nav>
+      </nav>
+    </div>
 
 
-
-
+</div>
 
 
 
