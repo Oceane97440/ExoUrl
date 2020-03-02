@@ -49,10 +49,13 @@ controller.qrcode= (req, res, next) => {
 
   IDURL.findById(req.params.item, (err, url) => {
 
-  QRCode.toDataURL(url.url, function (err, product) {
-    console.log(product);
+  QRCode.toDataURL(url.url, function (err, qrcode) {
+    console.log(qrcode);
 
-    res.render('qrcode.ejs',{product});
+    //res.render('qrcode.ejs',{qrcode});
+
+    res.send(qrcode);
+
   });
 
  });
@@ -74,7 +77,7 @@ controller.save = (req, res) => {
             res.send(err);
           }
           
-          return res.redirect('/'); 
+          return res.redirect('/page'); 
   
       })
   };
