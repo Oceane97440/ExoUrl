@@ -20,7 +20,7 @@
 
       <%- include('partials/nav') %>
 
-      <h1>Listes URL</h1>
+      <h1>Retrouver votre URL convertie en QRCODE</h1>
 
 
 
@@ -43,7 +43,7 @@
          <div class="col-md-4">
             <div class="card mb-4">
                <div class="card-body">
-                  <h5 class="card-title">Votre URL</h5>
+                  <h5 class="card-title">Votre url</h5>
                   <p class="card-text">Id:<%= products[i]._id %></p>
                   <!-- <a class="btn btn-outline-dark btn-sm" target="_blank" role="button"
                      href="/qrcode/<%= products[i]._id %>"><%= products[i].url %></a> -->
@@ -73,20 +73,7 @@
                      <img id="qrcode" src="">
                      <!-- Modal -->
                      <div class="modal fade" id="myModal" role="dialog">
-                        <div class="modal-dialog">
-
-                           <!-- Modal content-->
-                           <div class="modal-content">
-                              <div class="modal-header">
-                                 <h4 class="modal-title">Votre QRCode</h4>
-                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-                              </div>
-
-
-
-                           </div>
-                        </div>
+                   
                         <div class="modal-footer">
                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
