@@ -1,0 +1,17 @@
+{
+  "name": "exourl",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "express-paginate": "^1.0.0",
+    "mongoose": "^5.9.1",
+    "mongoose-auto-increment": "^5.0.1",
+    "qrcode": "^1.4.4"   
+  }
+}
